@@ -17,6 +17,7 @@ refs.form.addEventListener('submit', typeName)
 async function typeName(evt) {
     evt.preventDefault();
     clearGallery()
+    loadMoreBtn.hide()
    
         newApiService.searchQuery = evt.currentTarget.elements.searchQuery.value
         newApiService.resetPage()
@@ -71,7 +72,7 @@ async function lastImageFinded() {
         loadMoreBtn.hide()
 Notify.failure(" We are sorry, but you've reached the end of search results.")
     } else {
-         loadMoreBtn.show()
+         await loadMoreBtn.show()
     }
    
 }
