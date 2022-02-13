@@ -5,7 +5,7 @@ import LoadMoreBtn from './loadMoreBtn';
 
 const refs = {
     form: document.querySelector('#search-form'),
-    gallery: document.querySelector('.gallery')
+    gallery: document.querySelector('.gallery'),
     // btnMore: document.querySelector('.load-more')
 }
 
@@ -17,13 +17,14 @@ refs.form.addEventListener('submit', typeName)
 async function typeName(evt) {
     evt.preventDefault();
     clearGallery()
-    loadMoreBtn.hide()
-   
+    if (!loadMoreBtn.btn.classList.contains('is-hidden')) {
+loadMoreBtn.hide()
+    }
         newApiService.searchQuery = evt.currentTarget.elements.searchQuery.value
         newApiService.resetPage()
-        newApiService.fetchImages().then(hits => {
-            createMarkup(hits)
-            lastImageFinded()
+        await newApiService.fetchImages().then(hits => {
+        createMarkup(hits)
+        lastImageFinded()
         })
     
     
